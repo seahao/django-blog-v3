@@ -1,6 +1,7 @@
 # USER SPECIFIC/IDE FILES
 .idea/
 
+djangoenv/
 
 *.pyc
 *.db
