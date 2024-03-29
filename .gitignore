@@ -1,0 +1,11 @@
+# USER SPECIFIC/IDE FILES
+.idea/
+
+
+*.pyc
+*.db
+*.sqlite3
+
+
+# GENERAL PYTHON FILES
+__pycache__/
