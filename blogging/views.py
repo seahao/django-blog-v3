@@ -4,6 +4,9 @@ from django.template import loader
 from blogging.models import Post
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.contrib.auth.decorators import login_required
+from blogging.forms import PostForm
+from django.utils import timezone
 
 
 class PostListView(ListView):
@@ -41,3 +44,19 @@ def stub_view(request, *args, **kwargs):
         body += "Kwargs:\n"
         body += "\n".join(["\t%s: %s" % i for i in kwargs.items()])
     return HttpResponse(body, content_type="text/plain")
+
+
+@login_required
+def add_modelform(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            form.save_m2m()
+            return HttpResponseRedirect("/")
+    else:
+        form = PostForm()
+    return render(request, "blogging/add.html", {"form": form})
