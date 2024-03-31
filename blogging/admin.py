@@ -6,11 +6,16 @@ class InlineModelAdmin(admin.TabularInline):
     model = Category.posts.through
     extra = 2
 
+
 class PostAdmin(admin.ModelAdmin):
-    inlines = [InlineModelAdmin, ]
+    inlines = [
+        InlineModelAdmin,
+    ]
+
 
 class CategoryAdmin(admin.ModelAdmin):
-    exclude = ('posts',)
+    exclude = ("posts",)
+
 
 try:
     admin.site.unregister(Category)
