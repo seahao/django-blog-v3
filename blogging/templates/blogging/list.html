@@ -1,5 +1,9 @@
 {% extends "base.html" %}{% block content %}
   <h1>Coolest Blog Posts</h1>
+
+
+  <p><a href="{% url 'add_post' %}">Add a Post</a></p>
+
   {% comment %} here is where the query happens {% endcomment %}
   {% for post in object_list %}
   <div class="post">
